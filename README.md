@@ -1,28 +1,105 @@
-# Cooperation
+## svg字体图标的统一注册
+### 注册svg的方法
+app/utils/svg.util.ts
+```js
+import { MdIconRegistry } from '@angular/material';
+import { DomSanitizer } from '@angular/platform-browser';
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.2.6.
+export const loadSvgSesources = (ir: MdIconRegistry, ds: DomSanitizer) => {
+  // 注册自定义的svg图标，‘frees’是图标的名字，后面是路径（解析路径需要HttpMudule模块）
+  ir.addSvgIcon('frees', ds.bypassSecurityTrustResourceUrl('assets/优惠券.svg'));     
+}
+```
+### 通过Coremodule统一导入
+core/core.module.ts
+```js
+import { MdIconRegistry } from '@angular/material';
+import { DomSanitizer } from '@angular/platform-browser';
 
-## Development server
+import { HttpModule } from '@angular/http';
+import { loadSvgSesources } from '../utils/svg.util';
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+// ***
+export class CoreModule {
+  constructor(
+    ir: MdIconRegistry,
+    ds: DomSanitizer
+  ) {
+    loadSvgSesources(ir, ds);
+  }
+}
+```
+### 将CoreModule导入根模块
+```js
+import { CoreModule } from './core/core.module';
 
-## Code scaffolding
+@NgModule({
+  imports: [
+    CoreModule
+  ]
+})
+```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|module`.
+## 创建登录模块
+### 登录模块的路由
+app/login/login-routing.module.ts
+```js
+// 键入‘ngrout’可以生成路由片段，但是要稍作调整
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { LoginComponent } from './login/login.component';
 
-## Build
+const routes: Routes = [
+  { path: 'login', component: LoginComponent }
+];
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+@NgModule({
+  // 模块中的路由都是‘forChikd’
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
+})
+export class LoginRoutingModule {}
+```
+### LoginModule
+app/login/login.module.ts
+```js
+// ***
+import { LoginRoutingModule } from './login-routing.module';
 
-## Running unit tests
+@NgModule({
+  imports: [
+    LoginRoutingModule
+  ],
+})
+// ***
+```
+### 创建根路由
+app/app-routing.module.ts
+```js
+// ***
+const routes: Routes = [
+  // 重定向，并且一旦路径匹配就填充路径
+  { path: '', redirectTo: '/login', pathMatch: 'full' }
+];
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+@NgModule({
+  // 跟路由自然用‘forRoot’
+  imports: [RouterModule.forRoot(routes)]
+})
+// ***
+```
+### 根模块
+app/app.module.ts
+```js
+// ***
+import { AppRoutingModule } from './app-routing.module';
+import { LoginModule } from './login/login.module';
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+@NgModule({
+  imports: [
+    AppRoutingModule,
+    LoginModule
+  ],
+})
+// ***
+```
