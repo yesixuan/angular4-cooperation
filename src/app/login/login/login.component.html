@@ -1,14 +1,35 @@
-<md-card>
-  <md-card-header>
-    <md-card-title>登录：</md-card-title>
-  </md-card-header>
-  <md-card-content>
-    <md-input-container>
-      <input mdInput type="text" placeholder="您的email">
-    </md-input-container>
-  </md-card-content>
-  <md-card-actions>
-    <p>还没有账户？<a href="">注册</a></p>
-    <p>忘记密码？<a href="">找回</a></p>
-  </md-card-actions>
-</md-card>
+<form>
+  <md-card>
+    <md-card-header>
+      <md-card-title>登录：</md-card-title>
+    </md-card-header>
+    <md-card-content>
+      <md-input-container class="full-width">
+        <input mdInput type="text" placeholder="您的email">
+      </md-input-container>
+      <md-input-container class="full-width">
+        <input mdInput type="password" placeholder="您的密码">
+      </md-input-container>
+      <button md-raised-button type="button">登录</button>
+    </md-card-content>
+    <md-card-actions class="text-right">
+      <p>还没有账户？<a href="">注册</a></p>
+      <p>忘记密码？<a href="">找回</a></p>
+    </md-card-actions>
+  </md-card>
+
+  <md-card>
+    <md-card-header>
+      <md-card-title>
+        每日佳句
+      </md-card-title>
+      <md-card-subtitle>
+        能够轻易失去的，从来就不真正属于你！
+      </md-card-subtitle>
+    </md-card-header>
+    <img md-card-image src="assets/quote_fallback.jpg">
+    <md-card-content>
+      to be, or not to be? this is a question.
+    </md-card-content>
+  </md-card>
+</form>
