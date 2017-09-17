@@ -6,7 +6,9 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+  // 如果不发射数据，就用<void>
   @Output() toggle= new EventEmitter<void>();
+  @Output() toggleDarkTheme = new EventEmitter();
 
   constructor() {    
   }
@@ -16,5 +18,9 @@ export class HeaderComponent implements OnInit {
 
   openSidebar() {
     this.toggle.emit();
+  }
+
+  onChange(checked: boolean) {
+    this.toggleDarkTheme.emit(checked);
   }
 }
