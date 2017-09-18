@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MdDialog } from '@angular/material';
 import { NewProjectComponent } from '../new-project/new-project.component';
+import { InviteComponent } from '../invite/invite.component';
 
 @Component({
   selector: 'app-project-list',
@@ -34,7 +35,11 @@ export class ProjectListComponent implements OnInit {
   openNewProjectDialog() {
     const dialogRef = this.dialog.open(NewProjectComponent, {data: {dark: true}});
     // 接收从弹框传过来的数据
-    dialogRef.afterClosed().subscribe(res => console.log(res))
+    dialogRef.afterClosed().subscribe(res => console.log(res));
+  }
+
+  launchInviteDialog() {
+    const dialogRef = this.dialog.open(InviteComponent);
   }
 
 }
