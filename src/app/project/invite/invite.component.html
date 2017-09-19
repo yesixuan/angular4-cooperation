@@ -10,7 +10,7 @@
     <button type="button" md-button md-dialog-close>关闭</button>
   </div>
 </form>
-<!-- displayUser是自定义的函数 -->
+<!-- displayUser是自定义的函数，意味着我们传入的是一个函数，而不是一个函数的返回结果 -->
 <md-autocomplete #autoMembers="mdAutocomplete" [displayWith]="displayUser">
   <md-option *ngFor="let item of items" [value]="item.name">
     {{item.name}}
