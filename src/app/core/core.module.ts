@@ -9,6 +9,9 @@ import { HttpModule } from '@angular/http';
 import { loadSvgSesources } from '../utils/svg.util';
 import { SharedModule } from '../shared/shared.module';
 
+// 移动端需要的一些拖拽等操作
+import 'hammerjs';
+
 @NgModule({
   imports: [
     HttpModule,
