@@ -7,6 +7,7 @@ import { MD_DIALOG_DATA, MdDialogRef, OverlayContainer } from '@angular/material
   styleUrls: ['./new-project.component.scss']
 })
 export class NewProjectComponent implements OnInit {
+  title: string = '';
 
   // MD_DIALOG_DATA是传进来的数据，MdDialogRef是要传出的数据
   constructor(
@@ -18,6 +19,7 @@ export class NewProjectComponent implements OnInit {
   ngOnInit() {
     // appComponent全局整了这个，所以这里不需要了
     // this.oc.themeClass = this.data.dark? 'myapp-dark-theme': null;
+    this.title = this.data.title;
   }
 
   onClick() {
