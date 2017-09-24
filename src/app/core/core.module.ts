@@ -15,6 +15,7 @@ import 'hammerjs';
 import 'rxjs/add/operator/take'
 // 将路由模块从根模块移到coreModule中
 import { AppRoutingModule } from '../app-routing.module';
+import { ServicesModule } from '../services/services.module';
 
 @NgModule({
   imports: [
@@ -22,7 +23,8 @@ import { AppRoutingModule } from '../app-routing.module';
     SharedModule,
     AppRoutingModule,
     // 动画模块一般放在所有模块最后，否则可能出现一些异常
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ServicesModule.forRoot()
   ],
   exports: [
     HeaderComponent, 
