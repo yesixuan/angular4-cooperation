@@ -11,17 +11,23 @@ import { SharedModule } from '../shared/shared.module';
 
 // 移动端需要的一些拖拽等操作
 import 'hammerjs';
+// 将路由模块从根模块移到coreModule中
+import { AppRoutingModule } from '../app-routing.module';
 
 @NgModule({
   imports: [
     HttpModule,
-    BrowserAnimationsModule,
-    SharedModule
+    SharedModule,
+    AppRoutingModule,
+    // 动画模块一般放在所有模块最后，否则可能出现一些异常
+    BrowserAnimationsModule
   ],
   exports: [
     HeaderComponent, 
     FooterComponent, 
-    SidebarComponent
+    SidebarComponent,
+    AppRoutingModule,
+    // BrowserAnimationsModule
   ],
   declarations: [
     HeaderComponent, 
