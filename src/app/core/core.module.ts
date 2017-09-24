@@ -11,6 +11,8 @@ import { SharedModule } from '../shared/shared.module';
 
 // 移动端需要的一些拖拽等操作
 import 'hammerjs';
+// rxjs相关导入
+import 'rxjs/add/operator/take'
 // 将路由模块从根模块移到coreModule中
 import { AppRoutingModule } from '../app-routing.module';
 

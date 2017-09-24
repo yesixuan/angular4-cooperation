@@ -1,3 +1,4 @@
+ <!-- 记得[draggedClass]中，双引号中要套单引号，否则会把'drag-start'当作成员变量 -->
 <md-list-item class="container"
   [@item]="widerPriority"
   [ngClass]="{
@@ -5,6 +6,10 @@
     'priority-important': item.priority === 2,
     'priority-emergency': item.priority === 1
   }"
+  [app-draggable]="true"
+  [dragTag]="'task-item'"
+  [draggedClass]="'drag-start'"
+  [dragData]="item"
   (click)="editItemClick()">
   <md-checkbox 
     class="completion-status" 
