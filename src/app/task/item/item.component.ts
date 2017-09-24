@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, HostListener } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, HostListener, ChangeDetectionStrategy } from '@angular/core';
 import { itemAnim } from '../../anims/item.anim';
 
 @Component({
@@ -7,7 +7,8 @@ import { itemAnim } from '../../anims/item.anim';
   styleUrls: ['./item.component.scss'],
   animations: [
     itemAnim
-  ]
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ItemComponent implements OnInit {
   @Input() item;

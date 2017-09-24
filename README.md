@@ -229,4 +229,33 @@ import { listAnimation } from '../../anims/list.anim';
 })
 ```
 
+## 改变angular的默认检查策略
+angular的默认检查策略是在事件、ajax、定时器触发时检查整个组件树。  
+但是如果你的某个组件的改变完全取决于外部，此时就需要改变检查策略为OnPush。  
+如果某个组件会自己改变自己，而你又改变策略为OnPush，此时需要在改变自身的操作的地方打上标记，明确告诉angular过来检查。  
+注意：如果父组件改变策略为OnPush，而子组件策略还是默认的，那么在事件、ajax、定时器触发时angular会顺带检查该父组件。  
+```js
+import { ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+
+@Component({
+  // ***
+  // 将默认的检查机制改成只有当外部发生改变时才检查这个组件的策略
+  changeDetection: ChangeDetectionStrategy.OnPush
+})
+
+export class ProjectListComponent implements OnInit {
+  /* 
+  ChangeDetectorRef是当我们将这个组件的检查机制改成OnPush时
+  明确告诉angular在某个操作后还是要 检查的，避免angular不检查或盲目检查
+  */
+  constructor(private dialog: MdDialog, private cd: ChangeDetectorRef) { }
+
+  openNewProjectDialog() {
+    // *** 给数组增加了一项
+    // 告诉angular在这个点上，你来检查我
+    this.cd.markForCheck();
+  }
+}
+```
+
 
