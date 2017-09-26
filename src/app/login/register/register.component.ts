@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -6,18 +7,29 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
+  form: FormGroup;
   items: string[];
+  private readonly avatarName = 'avatars';
 
-  constructor() { }
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
-    // for(let i = 1; i <= 16; i++) {
-    //   this.items[i-1] = `avatars:svg-${i}`;
-    // }
+    const img = `${this.avatarName}:svg-${Math.floor(Math.random() * 16).toFixed(0)}`;
     let _items = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16];
     this.items = _items.map(item => {
       return `avatars:svg-${item}`;
     })
+    // 构建响应式表单
+    this.form = this.fb.group({
+      email: [],
+      name: [],
+      password: [],
+      repeat: [],
+      avatar: [img]
+    })
   }
 
+  onSubmit(form, $event) {
+
+  }
 }
