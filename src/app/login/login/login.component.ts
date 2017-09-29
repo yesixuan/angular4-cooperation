@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { QuoteService } from '../../services/quote.service';
+import { Quote } from '../../domain/quote.module';
 
 @Component({
   selector: 'app-login',
@@ -8,8 +10,16 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 })
 export class LoginComponent implements OnInit {
   form: FormGroup;
+  quote: Quote = {
+    cn: '能够轻易失去的，从来就不真正属于你！',
+    en: 'to be, or not to be? this is a question.',
+    pic: 'assets/quote_fallback.jpg'
+  };
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private quoteService$: QuoteService) { 
+    this.quoteService$.getQuote()
+      .subscribe(res => this.quote = res)
+  }
 
   ngOnInit() {
     // 原始方式初始化表单

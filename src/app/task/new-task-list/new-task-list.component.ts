@@ -19,7 +19,7 @@ export class NewTaskListComponent implements OnInit {
     this.title = this.data.title;
   }
 
-  onClick(result: boolean) {
+  onClick() {
     this.dialogRef.close(this.title);
   }
 }

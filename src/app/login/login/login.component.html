@@ -25,12 +25,12 @@
         每日佳句
       </md-card-title>
       <md-card-subtitle>
-        能够轻易失去的，从来就不真正属于你！
+        {{quote.cn}}
       </md-card-subtitle>
     </md-card-header>
-    <img md-card-image src="assets/quote_fallback.jpg">
+    <img md-card-image [src]="quote.pic">
     <md-card-content>
-      to be, or not to be? this is a question.
+      {{quote.en}}
     </md-card-content>
   </md-card>
 </form>
