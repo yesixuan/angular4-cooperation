@@ -1,7 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Http } from '@angular/http';
-import { Quote } from '../domain/quote.module';
+import { Quote } from '../domain/quote.model';
 
 // 定义好的服务要添加到模块中的providers元数据中
 @Injectable()
