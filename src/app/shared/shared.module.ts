@@ -19,12 +19,14 @@ import {
   MdDatepickerModule,
   MdNativeDateModule,
   MdSelectModule,
-  MdSidenavModule
+  MdSidenavModule,
+  MdButtonToggleModule
 } from '@angular/material';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component'
 import { DirectiveModule } from '../directive/directive.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ImageListSelectComponent } from './image-list-select/image-list-select.component';
+import { AgeInputComponent } from './age-input/age-input.component';
 
 @NgModule({
   imports: [
@@ -32,7 +34,9 @@ import { ImageListSelectComponent } from './image-list-select/image-list-select.
     MdToolbarModule,
     MdIconModule,
     MdButtonModule,
+    MdButtonToggleModule,
     MdCardModule,
+    MdInputModule,
     MdListModule,
     MdSlideToggleModule,
     MdGridListModule,
@@ -55,6 +59,7 @@ import { ImageListSelectComponent } from './image-list-select/image-list-select.
     MdToolbarModule,
     MdIconModule,
     MdButtonModule,
+    MdButtonToggleModule,
     MdCardModule,
     MdInputModule,
     MdListModule,
@@ -73,11 +78,13 @@ import { ImageListSelectComponent } from './image-list-select/image-list-select.
     DirectiveModule,
     FormsModule,
     ReactiveFormsModule,
-    ImageListSelectComponent, // 自己定义的选择头像表单组件
+    ImageListSelectComponent, // 自己定义的选择头像表单组件 
+    AgeInputComponent
   ],
   declarations: [
     ConfirmDialogComponent, 
-    ImageListSelectComponent
+    ImageListSelectComponent, 
+    AgeInputComponent
   ],
   entryComponents: [ConfirmDialogComponent]
 })

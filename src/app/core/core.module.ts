@@ -13,6 +13,8 @@ import { SharedModule } from '../shared/shared.module';
 import 'hammerjs';
 // rxjs相关导入
 import 'rxjs/add/operator/take';
+import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/observable/combineLatest';
 // 自定义rxjs的操作符
 import '../utils/debug.util';
 // 将路由模块从根模块移到coreModule中
