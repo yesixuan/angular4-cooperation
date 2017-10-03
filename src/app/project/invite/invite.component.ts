@@ -1,4 +1,6 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Inject } from '@angular/core';
+import { User } from '../../domain/user.model';
+import { MD_DIALOG_DATA, MdDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-invite',
@@ -7,33 +9,27 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InviteComponent implements OnInit {
-  items = [
-    {
-      id: 1,
-      name: 'zhangsan'
-    },{
-      id: 2,
-      name: 'lisi'
-    },{
-      id: 3,
-      name: 'wangwu'
-    },{
-      id: 4,
-      name: 'zhaoliu'
-    }
-  ]
+  members: User[] = []
 
-  constructor() { }
+  constructor(
+    @Inject(MD_DIALOG_DATA) private data,
+    private dialogRef: MdDialogRef<InviteComponent>
+  ) { }
 
   ngOnInit() {
+    this.members = [...this.data.members]
   }
 
   // 没必要为了user而单独定义一个User类，可以直接用这种对象展开的方式定义,注意分号
-  displayUser(user: {id: string; name: string}) {
+  /*displayUser(user: {id: string; name: string}) {
     return user ? user.name : '';
-  }
+  }*/
 
-  onClick() {
-    
+  onSubmit(ev: Event, {value, valid}) {
+    ev.preventDefault();
+    if(!valid) {
+      return;
+    }
+    this.dialogRef.close(this.members);
   }
 }
