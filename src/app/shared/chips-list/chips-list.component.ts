@@ -28,6 +28,8 @@ export class ChipsListComponent implements ControlValueAccessor, OnInit, OnDestr
   form: FormGroup;
   items: User[] = [];
   memberResult$: Observable<User[]>;
+  memberResults;
+  sub;
   private propagateChange = (_: any) => {}
 
   constructor(private fb: FormBuilder, private service: UserService) { }
@@ -36,18 +38,23 @@ export class ChipsListComponent implements ControlValueAccessor, OnInit, OnDestr
     this.form = this.fb.group({
       memberSearch: ['']
     })
+    // 这个流并没有被订阅，这是因为angular帮我们做了很多事情（详见html片段）
     this.memberResult$ = this.form.get('memberSearch').valueChanges
       .debounceTime(300)
       .distinctUntilChanged()
       .filter(s => s && s.length > 1) // 确保有值并且长度大于1
       .switchMap(str => this.service.searchUsers(str));
+    // 这里老师是在标签中使用async管道，但是我这边用了没反应，所以还是用传统的订阅方式
+    this.sub = this.memberResult$
+      .subscribe(v => this.memberResults  = v)
   }
 
   ngOnDestroy() {
+    this.sub && this.sub.unsubscribe();
   }
   
   // 外部给该控件赋初始值时用到这个函数
-  writeValue(obj: any): void{
+  writeValue(obj: User[]): void{
     if(obj && this.multiple) {
       const userEntities = obj.reduce((e, c) => ({...e, c}), {});
       if(this.items) {
@@ -64,7 +71,7 @@ export class ChipsListComponent implements ControlValueAccessor, OnInit, OnDestr
 
   validate(c: FormControl): {[key: string]: any} {
     return this.items ? null : {
-      ChipsListInvalid: true
+      chipsListInvalid: true
     }
   }
 

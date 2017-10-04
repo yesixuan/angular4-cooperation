@@ -17,7 +17,7 @@
 </div>  
 <md-autocomplete #autoMember="mdAutocomplete" [displayWith]="displayUser">
   <md-option 
-    *ngFor="let item of memberResults$ | async"
+    *ngFor="let item of memberResults"
     [value]="item"
     (onSelectionChange)="handleMemberSelection(item)">
     {{item.name}}
